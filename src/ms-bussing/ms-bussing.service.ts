@@ -7,18 +7,12 @@ export class MsBussingService {
   constructor(private configService: ConfigService) {}
 
   async sendTG(req: any) {
-    const telegramUrl = this.configService.get<string>('TELEGRAM_API_BOT_URL');
     const botToken = this.configService.get<string>('TELEGRAM_API_BOT_TOKEN');
-    const botCommand = this.configService.get<string>(
-      'TELEGRAM_API_BOT_COMMAND',
-    );
     const chatId = this.configService.get<string>('TELEGRAM_API_BOT_CHAT_ID');
-
-    const telegram = `${telegramUrl}${botToken}${botCommand}?chat_id=${chatId}`;
+    const telegram = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}`;
 
     const query = '&text=';
     const formattedMessage = req.body.message.replace(/\n/g, '%0A');
-
     const message = `${telegram}${query}${formattedMessage}`;
 
     try {
