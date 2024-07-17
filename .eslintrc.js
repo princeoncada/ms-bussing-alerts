@@ -11,6 +11,10 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   root: true,
+  extends: '@react-native-community',
+  rules: {
+    'prettier/prettier': 0,
+  },
   env: {
     node: true,
     jest: true,
